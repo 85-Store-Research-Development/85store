@@ -67,9 +67,12 @@ export default async function RndPage() {
           })),
         }}
       />
-      <div className="flex items-end justify-between gap-6 border-b border-ink pb-6">
-        <p className="wordmark text-[clamp(3rem,1rem+9vw,9rem)] leading-[0.85]" aria-hidden="true">R&amp;D</p>
-        <RndMark className="h-[clamp(72px,9vw,132px)] w-auto flex-none" />
+      {/* マークを大きく置き、右端は画面の外へはみ出させる。R&D の文字は左下 */}
+      <div className="-mx-(--gutter) overflow-x-clip px-(--gutter)">
+        <div className="relative border-b border-ink">
+          <RndMark className="ml-auto block h-auto w-[min(88%,calc(72svh*0.866))] translate-x-[18%]" />
+          <p className="wordmark absolute bottom-0 left-0 pb-4 text-[clamp(3rem,1rem+9vw,9rem)] leading-[0.85]" aria-hidden="true">R&amp;D</p>
+        </div>
       </div>
       <div className="grid gap-x-[clamp(24px,5vw,80px)] gap-y-8 pt-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)]">
         <h1 className="font-display text-[clamp(1.75rem,1.1rem+2vw,2.75rem)] leading-[1.02] tracking-tight">
