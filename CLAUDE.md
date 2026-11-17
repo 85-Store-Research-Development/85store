@@ -58,6 +58,7 @@ CMS が公開・更新のたびに R2 へ書き出したあと `POST /api/revali
 | `/blog/[slug]` | 記事（スラッグ）。microCMS から移した記事は、そのコンテンツIDがスラッグ。`id`（旧コンテンツID）でアクセスされ、スラッグと違う場合は 308 リダイレクト |
 | `/blog/category/[category]`, `/blog/tag/[tag]` | カテゴリ・タグ別一覧（0件は404） |
 | `/blog/products`, `/blog/styling`, `/blog/event` | ブログの区分（`utils/blog.ts` の `BLOG_SECTIONS` でカテゴリをまとめる。0件でも出す）。ショップのメニューからリンクしている。区分と同じ1つのカテゴリ（Products・Styling）の `/blog/category/...` は区分へ 308 |
+| `/event` | 85-Store の近くのイベント（`lib/nearby-events.ts`）。富山みっけ（toyamamikke.com）の「イベント」＋市（南砺・砺波・小矢部・高岡）のタグのフィードを1時間ごとに読み、題名から日程と地区（`AREAS`・`CITY_AREAS`、車での目安の分数）を読み取る。車で20分圏内（Nearby）・小矢部と高岡（A Little Further）・終わった催し（Past）に分けて出す。南砺市で地区が分からない記事・山あい（利賀・五箇山）・放送や商品券の記事は載せない。開催日の営業時間は営業日カレンダーから出す。富山みっけ編集部の許諾（2026-11-13、RSS を使った記事へのリンク付きの紹介）を得ており、その旨をページに書いている。題名・要約・リンクだけを載せ、画像と本文は載せない（載せるならあらためて相談する） |
 | `/faq` | よくある質問（`lib/faq.ts`。表示・FAQPage の構造化データ・llms.txt で共有） |
 | `/sitemap.xml`, `/robots.txt`, `/feed.xml`, `/atom.xml`, `/llms.txt` | `app/sitemap.ts` 等で動的生成。llms.txt は AI 向けの要約（`lib/llms.ts`）、robots.txt は AI のクローラーを明示的に許可 |
 | `/about`, `/reserve`, `/upstore`, `/contact`, `/hakoneko` | 固定ページ（hakoneko は独自デザインのゲーム紹介ページ） |
