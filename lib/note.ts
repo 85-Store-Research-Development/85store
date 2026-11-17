@@ -1,5 +1,6 @@
 // note.com RSSフィードから記事を取得
 import { cacheLife, cacheTag } from "next/cache";
+import { cleanDescription, decodeHtmlEntities, extractTag, rssItems, toIsoDate } from "@/lib/rss";
 
 export interface NoteArticle {
   id: string;
@@ -36,13 +37,7 @@ export async function getNoteArticles(): Promise<NoteArticle[]> {
 function parseRssFeed(xml: string): NoteArticle[] {
   const articles: NoteArticle[] = [];
 
-  // <item>タグを抽出
-  const itemRegex = /<item>([\s\S]*?)<\/item>/g;
-  let match;
-
-  while ((match = itemRegex.exec(xml)) !== null) {
-    const itemContent = match[1];
-
+  for (const itemContent of rssItems(xml)) {
     // 各フィールドを抽出
     const title = extractTag(itemContent, "title");
     const link = extractTag(itemContent, "link");
@@ -70,27 +65,6 @@ function parseRssFeed(xml: string): NoteArticle[] {
   return articles;
 }
 
-// RSSの日付（RFC 822形式）をISO形式に変換する（パースできなければ現在時刻）
-function toIsoDate(pubDate: string | undefined): string {
-  const date = pubDate ? new Date(pubDate) : new Date();
-  return Number.isNaN(date.getTime()) ? new Date().toISOString() : date.toISOString();
-}
-
-// XMLタグの内容を抽出
-function extractTag(content: string, tagName: string): string | undefined {
-  // CDATAセクションを含むパターン
-  const cdataRegex = new RegExp(`<${tagName}[^>]*><!\\[CDATA\\[([\\s\\S]*?)\\]\\]><\\/${tagName}>`, "i");
-  const cdataMatch = content.match(cdataRegex);
-  if (cdataMatch) {
-    return cdataMatch[1].trim();
-  }
-
-  // 通常のタグパターン
-  const regex = new RegExp(`<${tagName}[^>]*>([\\s\\S]*?)<\\/${tagName}>`, "i");
-  const match = content.match(regex);
-  return match ? match[1].trim() : undefined;
-}
-
 // media:thumbnailの内容またはURL属性を抽出
 function extractMediaThumbnail(content: string): string | undefined {
   // まず閉じタグがある形式を試す: <media:thumbnail>URL</media:thumbnail>
@@ -111,31 +85,4 @@ function extractEnclosureUrl(content: string): string | undefined {
   const regex = /<enclosure[^>]*url=["']([^"']+)["'][^>]*\/?>/i;
   const match = content.match(regex);
   return match ? match[1] : undefined;
-}
-
-// HTMLエンティティをデコード
-function decodeHtmlEntities(text: string): string {
-  return text
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
-    .replace(/&#x27;/g, "'")
-    .replace(/&#x2F;/g, "/");
-}
-
-// descriptionをクリーンアップ
-function cleanDescription(description: string): string {
-  // HTMLタグを削除
-  let text = description.replace(/<[^>]*>/g, "");
-  // HTMLエンティティをデコード
-  text = decodeHtmlEntities(text);
-  // 空白を正規化
-  text = text.replace(/\s+/g, " ").trim();
-  // 長すぎる場合は切り詰め
-  if (text.length > 150) {
-    text = text.substring(0, 150) + "...";
-  }
-  return text;
 }

@@ -10,6 +10,7 @@ const NAV_ITEMS = [
   { href: "/blog", label: "Blog", ja: "ブログ" },
   { href: "/about", label: "About", ja: "お店について" },
   { href: "/reserve", label: "Reserve", ja: "来店予約" },
+  { href: "/event", label: "Event", ja: "近くのイベント" },
   { href: "/rnd", label: "R&D", ja: "研究開発" },
   { href: "/contact", label: "Contact", ja: "お問い合わせ" },
 ];

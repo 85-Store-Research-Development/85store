@@ -57,6 +57,7 @@ ${specialLines.length ? specialLines.join("\n") : "今のところありませ�
 - [お店について](${siteUrl}/about): コンセプト・取り扱いブランド・スタッフ・沿革
 - [よくある質問](${siteUrl}/faq): 場所・営業時間・駐車場・予約・支払い方法・価格帯
 - [来店予約](${siteUrl}/reserve): 延長営業や定休日の来店予約、イベント
+- [近くのイベント](${siteUrl}/event): 85-Store から車で20分圏内（井波・庄川・福野・城端・福光・砺波）と小矢部・高岡のイベント、その日の営業時間
 - [85-UpStore](${siteUrl}/upstore): 2階の共創スペース（ポップアップ・展示・ワークショップ）
 - [ブログ](${siteUrl}/blog): 入荷・スタイリング・イベントのお知らせ
 - [お問い合わせ](${siteUrl}/contact)
