@@ -35,6 +35,14 @@ export const STORE = {
   },
   // 取り扱い（新品のブランドと古着の種類）
   brands: ["River", "VOIRY", "SOWBOW", "Macmahon Knitting Mills", "Building"],
+  // ブランドごとのオンラインストアのページ（コレクション。VOIRY はブランドのページ）。無いブランドは載せない
+  brandPages: {
+    River: "https://shop.85-store.com/collections/river",
+    VOIRY: "https://shop.85-store.com/pages/voiry",
+    SOWBOW: "https://shop.85-store.com/collections/sowbow",
+    "Macmahon Knitting Mills": "https://shop.85-store.com/collections/mcmahon-knitting-mills",
+    Building: "https://shop.85-store.com/collections/building",
+  } as Record<string, string | undefined>,
   vintage: ["アメリカ古着", "ヨーロッパ古着", "国内ドメブラ古着"],
   // 対象エリア（構造化データの areaServed）
   areaServed: ["南砺市", "砺波市", "富山県"],

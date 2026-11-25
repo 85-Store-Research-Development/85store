@@ -21,11 +21,13 @@ const archivo = Archivo({
 });
 
 // 和文・本文: IBM Plex Sans JP（和文は unicode-range で必要な分だけ読み込まれる）
+// 太さ4つ × 文字の範囲ごとのファイルで300を超えるため、preload しない（使う文字の分だけブラウザが読む）
 const plexJP = IBM_Plex_Sans_JP({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
   variable: "--font-plex-jp",
   display: "swap",
+  preload: false,
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://85-store.com';

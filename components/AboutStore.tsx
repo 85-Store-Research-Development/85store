@@ -1,4 +1,5 @@
 import Phrase from "@/components/Phrase";
+import { STORE } from "@/lib/store-info";
 
 export default function AboutStore() {
   return (
@@ -24,11 +25,18 @@ export default function AboutStore() {
       <div>
         <h3 className="text-lg font-bold text-ink">取り扱いブランド</h3>
         <ul className="mt-4 space-y-2 text-sm text-ink-2 leading-relaxed">
-          <li>River</li>
-          <li>VOIRY</li>
-          <li>SOWBOW</li>
-          <li>Macmahon Knitting Mills</li>
-          <li>Building</li>
+          {STORE.brands.map((brand) => {
+            const href = STORE.brandPages[brand];
+            return (
+              <li key={brand}>
+                {href ? (
+                  <a href={href} className="underline decoration-1 underline-offset-4 hover:decoration-2">{brand}</a>
+                ) : (
+                  brand
+                )}
+              </li>
+            );
+          })}
         </ul>
 
         <h3 className="text-lg font-bold text-ink mt-8">古着</h3>
