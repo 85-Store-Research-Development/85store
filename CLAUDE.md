@@ -2,6 +2,10 @@
 
 このリポジトリで作業する Claude Code 向けのガイドです。
 
+@BRAND.md
+
+`BRAND.md` は 85-Store のブランドの正本の写し。画面・文章・広告・機能はこれに合わせる。正本は [85-Store-Research-Development/85store-brand](https://github.com/85-Store-Research-Development/85store-brand)。ここでは直さない。写した元のコミット: ff40b8a
+
 ## プロジェクト概要
 
 富山県南砺市井波の古着・セレクトショップ「85-Store（ハコストア）」の公式サイト（https://85-store.com）。
