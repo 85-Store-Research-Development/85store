@@ -52,6 +52,10 @@ export async function getLlmsTxt(): Promise<string> {
 
 ${specialLines.length ? specialLines.join("\n") : "今のところありません（通常どおり営業）。"}
 
+## 取り扱いブランド（オンラインストア）
+
+${STORE.brands.flatMap((brand) => (STORE.brandPages[brand] ? [`- [${brand}](${STORE.brandPages[brand]})`] : [])).join("\n")}
+
 ## ページ
 
 - [お店について](${siteUrl}/about): コンセプト・取り扱いブランド・スタッフ・沿革
